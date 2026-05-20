@@ -3,16 +3,33 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
 import esbuildPluginPino from "esbuild-plugin-pino";
-import { rm } from "node:fs/promises";
+import { rm, cp } from "node:fs/promises";
+import { execSync } from "node:child_process";
+import { existsSync } from "node:fs";
 
 // Plugins (e.g. 'esbuild-plugin-pino') may use `require` to resolve dependencies
 globalThis.require = createRequire(import.meta.url);
 
 const artifactDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(artifactDir, "../..");
+const frontendDir = path.resolve(repoRoot, "artifacts/cloud-ide");
+const frontendDist = path.resolve(frontendDir, "dist/public");
 
 async function buildAll() {
   const distDir = path.resolve(artifactDir, "dist");
   await rm(distDir, { recursive: true, force: true });
+
+  // Build the frontend first so we can copy it into the server dist
+  console.log("Building frontend...");
+  execSync("pnpm run build", {
+    cwd: frontendDir,
+    stdio: "inherit",
+    env: {
+      ...process.env,
+      NODE_ENV: "production",
+      BASE_PATH: "/",
+    },
+  });
 
   await esbuild({
     entryPoints: [path.resolve(artifactDir, "src/index.ts")],
@@ -118,6 +135,15 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
     `,
     },
   });
+
+  // Copy the built frontend into the server dist so it's self-contained
+  if (existsSync(frontendDist)) {
+    console.log("Copying frontend build into server dist/public...");
+    await cp(frontendDist, path.resolve(distDir, "public"), { recursive: true });
+    console.log("Frontend copied.");
+  } else {
+    console.warn("Warning: frontend dist not found at", frontendDist);
+  }
 }
 
 buildAll().catch((err) => {

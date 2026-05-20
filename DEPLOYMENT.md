@@ -29,74 +29,51 @@ pnpm --filter @workspace/cloud-ide run dev
 
 ## Railway Deployment
 
-### Prerequisites
-- Railway account (railway.app)
-- GitHub repo with this code
-- PostgreSQL and Redis add-ons provisioned on Railway
+The entire app — frontend + API + database — deploys as **one Railway service**. No separate frontend service needed.
 
-### Step 1: Provision Services
-1. Create a new Railway project
-2. Add **PostgreSQL** plugin → Railway sets `DATABASE_URL` automatically
-3. Add **Redis** plugin → Railway sets `REDIS_URL` automatically
+### Step 1: Create a Railway Project
+1. Go to [railway.app](https://railway.app) and create a new project
+2. Add a **PostgreSQL** database → Railway sets `DATABASE_URL` automatically
+3. (Optional) Add a **Redis** database → Railway sets `REDIS_URL` automatically
 
-### Step 2: Deploy API Server
+### Step 2: Deploy the App
 1. Add a new **Service** → connect your GitHub repo
-2. Set **Root Directory**: `artifacts/api-server`
-3. Set **Build Command**: `pnpm install && pnpm run build`
-4. Set **Start Command**: `node --enable-source-maps ./dist/index.mjs`
+2. Set **Root Directory**: *(leave blank — use repo root)*
+3. Set **Build Command**:
+   ```
+   pnpm install && pnpm --filter @workspace/api-server run build
+   ```
+4. Set **Start Command**:
+   ```
+   node --enable-source-maps ./artifacts/api-server/dist/index.mjs
+   ```
 5. Set environment variables:
    ```
-   SESSION_SECRET=<generate 64-char random string>
+   SESSION_SECRET=<generate a 64-char random string>
+   NODE_ENV=production
    OPENAI_API_KEY=<optional>
    ANTHROPIC_API_KEY=<optional>
-   NODE_ENV=production
    ```
-6. Set **Port**: 8080
+6. Railway auto-assigns `PORT` — no need to set it manually
 
-### Step 3: Deploy Frontend
-1. Add another **Service** → same GitHub repo
-2. Set **Root Directory**: `artifacts/cloud-ide`
-3. Set **Build Command**: `pnpm install && pnpm run build`
-4. Set **Start Command**: serve the `dist/public` folder (use `npx serve dist/public`)
-5. Set environment variables:
-   ```
-   BASE_PATH=/
-   NODE_ENV=production
-   VITE_API_URL=https://<your-api-service>.railway.app
-   ```
-   > **Important:** `VITE_API_URL` must be set at **build time** (not just runtime) so the
-   > frontend knows where to send API requests. Replace the value with your actual Railway
-   > API service URL from Step 2.
-
-### Step 4: Configure Domains
-1. For the API service → set custom domain: `api.yourdomain.com`
-2. For the frontend service → set custom domain: `yourdomain.com`
-3. Railway generates SSL certificates automatically
-
-### Step 5: Database Migration
+### Step 3: Run Database Migration
+After the first deploy, open the Railway shell for your service and run:
 ```bash
-# Run once after deployment:
 DATABASE_URL=<your-railway-postgres-url> pnpm --filter @workspace/db run push
 ```
 
-### Step 6: Environment Variable Reference
+### Step 4: Done
+Your app is live at the Railway-provided URL. The same URL serves both the React UI and the API.
 
-**API Server variables:**
+### Environment Variable Reference
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `DATABASE_URL` | Yes | Set automatically by Railway PostgreSQL plugin |
 | `SESSION_SECRET` | Yes | JWT signing secret (min 32 chars) |
-| `REDIS_URL` | No | Redis for caching/queuing |
+| `REDIS_URL` | No | Set automatically by Railway Redis plugin |
 | `OPENAI_API_KEY` | No | For GPT-4o AI features |
 | `ANTHROPIC_API_KEY` | No | For Claude AI features |
-| `PORT` | Yes | Server port (default: 8080) |
-| `NODE_ENV` | Yes | Set to `production` |
-
-**Frontend variables (set at build time):**
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_API_URL` | Yes | Full URL of the API service (e.g. `https://api.railway.app`) |
-| `BASE_PATH` | Yes | URL base path, use `/` unless serving from a sub-path |
+| `PORT` | Auto | Set automatically by Railway |
 | `NODE_ENV` | Yes | Set to `production` |
 
 ---
