@@ -62,7 +62,11 @@ pnpm --filter @workspace/cloud-ide run dev
    ```
    BASE_PATH=/
    NODE_ENV=production
+   VITE_API_URL=https://<your-api-service>.railway.app
    ```
+   > **Important:** `VITE_API_URL` must be set at **build time** (not just runtime) so the
+   > frontend knows where to send API requests. Replace the value with your actual Railway
+   > API service URL from Step 2.
 
 ### Step 4: Configure Domains
 1. For the API service → set custom domain: `api.yourdomain.com`
@@ -76,6 +80,8 @@ DATABASE_URL=<your-railway-postgres-url> pnpm --filter @workspace/db run push
 ```
 
 ### Step 6: Environment Variable Reference
+
+**API Server variables:**
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | Yes | PostgreSQL connection string |
@@ -84,6 +90,13 @@ DATABASE_URL=<your-railway-postgres-url> pnpm --filter @workspace/db run push
 | `OPENAI_API_KEY` | No | For GPT-4o AI features |
 | `ANTHROPIC_API_KEY` | No | For Claude AI features |
 | `PORT` | Yes | Server port (default: 8080) |
+| `NODE_ENV` | Yes | Set to `production` |
+
+**Frontend variables (set at build time):**
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_API_URL` | Yes | Full URL of the API service (e.g. `https://api.railway.app`) |
+| `BASE_PATH` | Yes | URL base path, use `/` unless serving from a sub-path |
 | `NODE_ENV` | Yes | Set to `production` |
 
 ---
