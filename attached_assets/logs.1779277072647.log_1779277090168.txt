@@ -1,0 +1,137 @@
+2026-05-20T11:27:30.374776703Z [inf]  scheduling build on Metal builder "production-builderv3-us-west1-6d3c"
+2026-05-20T11:27:31.188097308Z [inf]  unpacking archive
+2026-05-20T11:27:31.261358306Z [inf]  using build driver nixpacks-v1.41.0
+2026-05-20T11:27:31.283438267Z [inf]  uploading snapshot
+2026-05-20T11:27:31.355472936Z [inf]  
+2026-05-20T11:27:31.355477386Z [inf]  ╔══════════════════════════════ Nixpacks v1.41.0 ══════════════════════════════╗
+2026-05-20T11:27:31.355478022Z [inf]  ║ setup      │ nodejs_18, pnpm-9_x, openssl                                    ║
+2026-05-20T11:27:31.355478849Z [inf]  ║──────────────────────────────────────────────────────────────────────────────║
+2026-05-20T11:27:31.355479199Z [inf]  ║ install    │ pnpm install --no-frozen-lockfile                               ║
+2026-05-20T11:27:31.355479845Z [inf]  ║──────────────────────────────────────────────────────────────────────────────║
+2026-05-20T11:27:31.355490587Z [inf]  ║ build      │ pnpm install && pnpm --filter @workspace/api-server run build   ║
+2026-05-20T11:27:31.355491301Z [inf]  ║──────────────────────────────────────────────────────────────────────────────║
+2026-05-20T11:27:31.355491803Z [inf]  ║ start      │ node --enable-source-maps ./artifacts/api-server/dist/index.mjs ║
+2026-05-20T11:27:31.355492537Z [inf]  ╚══════════════════════════════════════════════════════════════════════════════╝
+2026-05-20T11:27:31.355492776Z [inf]  
+2026-05-20T11:27:31.355833555Z [inf]  
+2026-05-20T11:27:31.355835560Z [inf]  Saved output to:
+2026-05-20T11:27:31.355836186Z [inf]    snapshot-target-unpack
+2026-05-20T11:27:31.428874678Z [inf]  [internal] load build definition from Dockerfile
+2026-05-20T11:27:31.428876876Z [inf]  [internal] load build definition from Dockerfile
+2026-05-20T11:27:31.428879796Z [inf]  [internal] load build definition from Dockerfile
+2026-05-20T11:27:31.428992758Z [inf]  [internal] load build definition from Dockerfile
+2026-05-20T11:27:31.444470792Z [inf]  [internal] load build definition from Dockerfile
+2026-05-20T11:27:31.448741593Z [inf]  [internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+2026-05-20T11:27:31.788787838Z [inf]  [internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+2026-05-20T11:27:31.789016554Z [inf]  [internal] load .dockerignore
+2026-05-20T11:27:31.789081960Z [inf]  [internal] load .dockerignore
+2026-05-20T11:27:31.789204577Z [inf]  [internal] load .dockerignore
+2026-05-20T11:27:31.803686834Z [inf]  [internal] load .dockerignore
+2026-05-20T11:27:31.807538522Z [wrn]  SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "SESSION_SECRET") (line 11)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+
+2026-05-20T11:27:31.807748252Z [wrn]  SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "SESSION_SECRET") (line 12)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+
+2026-05-20T11:27:31.807750380Z [wrn]  UndefinedVar: Usage of undefined variable '$NIXPACKS_PATH' (line 18)(https://docs.docker.com/go/dockerfile/rule/undefined-var/)
+ details: Variables should be defined before their use
+
+2026-05-20T11:27:31.809683805Z [inf]  [stage-0 10/10] COPY . /app
+2026-05-20T11:27:31.809684551Z [inf]  [stage-0  9/10] RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+2026-05-20T11:27:31.809685006Z [inf]  [stage-0  8/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-node_modules/cache,target=/app/node_modules/.cache pnpm install && pnpm --filter @workspace/api-server run build
+2026-05-20T11:27:31.809685331Z [inf]  [stage-0  7/10] COPY . /app/.
+2026-05-20T11:27:31.809685663Z [inf]  [stage-0  6/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-/root/local/share/pnpm/store/v3,target=/root/.local/share/pnpm/store/v3 pnpm install --no-frozen-lockfile
+2026-05-20T11:27:31.809685979Z [inf]  [stage-0  5/10] COPY . /app/.
+2026-05-20T11:27:31.809686489Z [inf]  [stage-0  4/10] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+2026-05-20T11:27:31.809686819Z [inf]  [stage-0  3/10] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+2026-05-20T11:27:31.809687148Z [inf]  [internal] load build context
+2026-05-20T11:27:31.809687462Z [inf]  [stage-0  2/10] WORKDIR /app/
+2026-05-20T11:27:31.809687685Z [inf]  [stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+2026-05-20T11:27:31.809783095Z [inf]  [internal] load build context
+2026-05-20T11:27:31.809783696Z [inf]  [stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+2026-05-20T11:27:31.809894859Z [inf]  [internal] load build context
+2026-05-20T11:27:31.819127677Z [inf]  [stage-0  1/10] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+2026-05-20T11:27:31.858808060Z [inf]  [internal] load build context
+2026-05-20T11:27:31.866559322Z [inf]  [stage-0  2/10] WORKDIR /app/
+2026-05-20T11:27:31.866560132Z [inf]  [stage-0  3/10] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+2026-05-20T11:27:31.866560628Z [inf]  [stage-0  4/10] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+2026-05-20T11:27:31.866575278Z [inf]  [stage-0  5/10] COPY . /app/.
+2026-05-20T11:27:31.920610740Z [inf]  [stage-0  5/10] COPY . /app/.
+2026-05-20T11:27:31.924255762Z [inf]  [stage-0  6/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-/root/local/share/pnpm/store/v3,target=/root/.local/share/pnpm/store/v3 pnpm install --no-frozen-lockfile
+2026-05-20T11:27:32.82751032Z [inf]  Scope: all 9 workspace projects
+
+2026-05-20T11:27:33.153496873Z [inf]  Progress: resolved 0, reused 0, downloaded 1, added 0
+
+2026-05-20T11:27:33.259015145Z [inf]  artifacts/api-server                     |  WARN  deprecated @types/bcryptjs@3.0.0
+
+2026-05-20T11:27:34.156829723Z [inf]  Progress: resolved 131, reused 0, downloaded 109, added 0
+
+2026-05-20T11:27:35.156376792Z [inf]  Progress: resolved 651, reused 0, downloaded 507, added 0
+
+2026-05-20T11:27:36.156775606Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 0
+
+2026-05-20T11:27:36.257380016Z [inf]   WARN  2 deprecated subdependencies found: @esbuild-kit/core-utils@3.3.2, @esbuild-kit/esm-loader@2.6.5
+
+2026-05-20T11:27:36.269500439Z [inf]  Packages: +517
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2026-05-20T11:27:37.156831815Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 413
+
+2026-05-20T11:27:38.157763743Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 485
+
+2026-05-20T11:27:39.158265054Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 504
+
+2026-05-20T11:27:40.159099939Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 512
+
+2026-05-20T11:27:41.933737513Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 513
+
+2026-05-20T11:27:42.934251222Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 514
+
+2026-05-20T11:27:43.67801955Z [inf]  Progress: resolved 658, reused 0, downloaded 517, added 517, done
+
+2026-05-20T11:27:44.068573892Z [inf]  .../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+
+2026-05-20T11:27:44.06915925Z [inf]  .../esbuild@0.27.7/node_modules/esbuild postinstall$ node install.js
+
+2026-05-20T11:27:44.069567857Z [inf]  .../esbuild@0.18.20/node_modules/esbuild postinstall$ node install.js
+
+2026-05-20T11:27:44.070075319Z [inf]  .../esbuild@0.25.12/node_modules/esbuild postinstall$ node install.js
+
+2026-05-20T11:27:44.142744591Z [inf]  .../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+
+2026-05-20T11:27:44.151065915Z [inf]  .../esbuild@0.27.7/node_modules/esbuild postinstall: Done
+
+2026-05-20T11:27:44.163995027Z [inf]  .../esbuild@0.18.20/node_modules/esbuild postinstall: Done
+
+2026-05-20T11:27:44.174120273Z [inf]  .../esbuild@0.25.12/node_modules/esbuild postinstall: Done
+
+2026-05-20T11:27:45.519354749Z [inf]  . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+
+2026-05-20T11:27:45.546924919Z [inf]  . preinstall: Done
+
+2026-05-20T11:27:45.649536068Z [inf]  
+devDependencies:
++ prettier 3.8.3
++ typescript 5.9.3 (6.0.3 is available)
+
+
+2026-05-20T11:27:45.650948308Z [inf]   WARN  Issues with peer dependencies found
+artifacts/api-server
+└─┬ esbuild-plugin-pino 2.3.3
+  └── ✕ unmet peer esbuild@">=0.25.0 <=0.25.8": found 0.27.3
+
+
+2026-05-20T11:27:45.691544212Z [inf]  Done in 13.2s using pnpm v9.15.9
+
+2026-05-20T11:27:46.789748431Z [inf]  [stage-0  6/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-/root/local/share/pnpm/store/v3,target=/root/.local/share/pnpm/store/v3 pnpm install --no-frozen-lockfile
+2026-05-20T11:27:46.794390855Z [inf]  [stage-0  7/10] COPY . /app/.
+2026-05-20T11:27:47.048947706Z [inf]  [stage-0  7/10] COPY . /app/.
+2026-05-20T11:27:47.054071627Z [inf]  [stage-0  8/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-node_modules/cache,target=/app/node_modules/.cache pnpm install && pnpm --filter @workspace/api-server run build
+2026-05-20T11:27:47.577320926Z [inf]  Scope: all 9 workspace projects
+
+2026-05-20T11:27:47.640162244Z [inf]   ERR_PNPM_LOCKFILE_CONFIG_MISMATCH  Cannot proceed with the frozen installation. The current "overrides" configuration doesn't match the value found in the lockfile
+
+Update your lockfile using "pnpm install --no-frozen-lockfile"
+
+2026-05-20T11:27:47.695048694Z [err]  [stage-0  8/10] RUN --mount=type=cache,id=s/438feb3e-2241-41e7-abd2-b316d62bbb62-node_modules/cache,target=/app/node_modules/.cache pnpm install && pnpm --filter @workspace/api-server run build
+2026-05-20T11:27:47.721369205Z [err]  Build Failed: build daemon returned an error < failed to solve: process "/bin/bash -ol pipefail -c pnpm install && pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1 >
