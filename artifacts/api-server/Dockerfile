@@ -1,4 +1,4 @@
-FROM node:22-alpine AS base
+FROM node:22-slim AS base
 RUN npm install -g pnpm@10
 
 FROM base AS deps
@@ -24,7 +24,7 @@ COPY --from=deps /app/artifacts/cloud-ide/node_modules ./artifacts/cloud-ide/nod
 COPY . .
 RUN pnpm --filter @workspace/api-server run build
 
-FROM node:22-alpine AS runner
+FROM node:22-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 novadev && \
