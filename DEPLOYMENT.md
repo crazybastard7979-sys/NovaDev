@@ -37,24 +37,19 @@ The entire app — frontend + API + database — deploys as **one Railway servic
 3. (Optional) Add a **Redis** database → Railway sets `REDIS_URL` automatically
 
 ### Step 2: Deploy the App
-1. Add a new **Service** → connect your GitHub repo
+1. Add a new **Service** → connect your GitHub repo (`crazybastard7979-sys/NovaDev`)
 2. Set **Root Directory**: *(leave blank — use repo root)*
-3. Set **Build Command**:
-   ```
-   pnpm install && pnpm --filter @workspace/api-server run build
-   ```
-4. Set **Start Command**:
-   ```
-   node --enable-source-maps ./artifacts/api-server/dist/index.mjs
-   ```
-5. Set environment variables:
+3. **IMPORTANT — Leave Build Command blank.** The repo has a `railway.json` that automatically configures the Dockerfile builder. Do NOT set a custom Build Command or Start Command in Railway's UI — those override `railway.json` and will break the build.
+4. Set environment variables:
    ```
    SESSION_SECRET=<generate a 64-char random string>
    NODE_ENV=production
    OPENAI_API_KEY=<optional>
    ANTHROPIC_API_KEY=<optional>
    ```
-6. Railway auto-assigns `PORT` — no need to set it manually
+5. Railway auto-assigns `PORT` — no need to set it manually
+
+> **If you previously set a Build Command or Start Command in Railway's UI**, go to your service → Settings → Build and clear both fields, then redeploy.
 
 ### Step 3: Run Database Migration
 After the first deploy, open the Railway shell for your service and run:
