@@ -1,0 +1,80 @@
+2026-05-24T04:46:29.790833814Z [inf]  scheduling build on Metal builder "production-builderv3-us-west1-s6sb"
+2026-05-24T04:46:30.461772591Z [inf]  unpacking archive
+2026-05-24T04:46:30.583019021Z [inf]  [internal] load build definition from artifacts/api-server/Dockerfile
+2026-05-24T04:46:30.583035686Z [inf]  [internal] load build definition from artifacts/api-server/Dockerfile
+2026-05-24T04:46:30.607510990Z [inf]  [internal] load build definition from artifacts/api-server/Dockerfile
+2026-05-24T04:46:30.748638672Z [inf]  [internal] load metadata for docker.io/library/node:22-alpine
+2026-05-24T04:46:30.748999502Z [inf]  [internal] load .dockerignore
+2026-05-24T04:46:30.749000253Z [inf]  [internal] load .dockerignore
+2026-05-24T04:46:30.749056184Z [inf]  [internal] load .dockerignore
+2026-05-24T04:46:30.770570688Z [inf]  [internal] load .dockerignore
+2026-05-24T04:46:30.778409416Z [inf]  [base 1/2] FROM docker.io/library/node:22-alpine@sha256:968df39aedcea65eeb078fb336ed7191baf48f972b4479711397108be0966920
+2026-05-24T04:46:30.778619086Z [inf]  [builder 4/9] COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
+2026-05-24T04:46:30.778619652Z [inf]  [deps 8/8] RUN pnpm install --no-frozen-lockfile
+2026-05-24T04:46:30.778621197Z [inf]  [runner 4/5] COPY --from=builder --chown=novadev:novadev /app/artifacts/api-server/dist ./dist
+2026-05-24T04:46:30.778624169Z [inf]  [builder 9/9] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:46:30.778625623Z [inf]  [deps 4/8] COPY lib/api-zod/package.json ./lib/api-zod/
+2026-05-24T04:46:30.778626429Z [inf]  [deps 3/8] COPY lib/db/package.json ./lib/db/
+2026-05-24T04:46:30.778626964Z [inf]  [deps 2/8] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+2026-05-24T04:46:30.778627944Z [inf]  [builder 8/9] COPY . .
+2026-05-24T04:46:30.778628349Z [inf]  [deps 6/8] COPY lib/api-client-react/package.json ./lib/api-client-react/
+2026-05-24T04:46:30.778628849Z [inf]  [builder 3/9] COPY --from=deps /app/lib/db/node_modules ./lib/db/node_modules
+2026-05-24T04:46:30.778629916Z [inf]  [builder 2/9] COPY --from=deps /app/node_modules ./node_modules
+2026-05-24T04:46:30.778634625Z [inf]  [runner 5/5] COPY --from=builder --chown=novadev:novadev /app/node_modules ./node_modules
+2026-05-24T04:46:30.778856301Z [inf]  [base 1/2] FROM docker.io/library/node:22-alpine@sha256:968df39aedcea65eeb078fb336ed7191baf48f972b4479711397108be0966920
+2026-05-24T04:46:30.778915041Z [inf]  [internal] load build context
+2026-05-24T04:46:30.788709148Z [inf]  [base 1/2] FROM docker.io/library/node:22-alpine@sha256:968df39aedcea65eeb078fb336ed7191baf48f972b4479711397108be0966920
+2026-05-24T04:46:30.790101526Z [inf]  [internal] load build context
+2026-05-24T04:46:30.794992823Z [inf]  [runner 3/5] RUN addgroup --system --gid 1001 novadev &&     adduser --system --uid 1001 --ingroup novadev novadev
+2026-05-24T04:46:30.833962810Z [inf]  [internal] load build context
+2026-05-24T04:46:30.849871296Z [inf]  [base 2/2] RUN npm install -g pnpm@10
+2026-05-24T04:46:30.849872319Z [inf]  [deps 2/8] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+2026-05-24T04:46:30.849873705Z [inf]  [deps 5/8] COPY lib/api-spec/package.json ./lib/api-spec/
+2026-05-24T04:46:30.849873970Z [inf]  [deps 6/8] COPY lib/api-client-react/package.json ./lib/api-client-react/
+2026-05-24T04:46:30.849874231Z [inf]  [deps 7/8] COPY artifacts/api-server/package.json ./artifacts/api-server/
+2026-05-24T04:46:30.849874881Z [inf]  [builder 2/9] COPY --from=deps /app/node_modules ./node_modules
+2026-05-24T04:46:30.849875250Z [inf]  [builder 3/9] COPY --from=deps /app/lib/db/node_modules ./lib/db/node_modules
+2026-05-24T04:46:30.849876776Z [inf]  [builder 4/9] COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
+2026-05-24T04:46:30.849877197Z [inf]  [builder 5/9] COPY --from=deps /app/lib/api-spec/node_modules ./lib/api-spec/node_modules
+2026-05-24T04:46:30.849877600Z [inf]  [builder 6/9] COPY --from=deps /app/lib/api-client-react/node_modules ./lib/api-client-react/node_modules
+2026-05-24T04:46:30.849878708Z [inf]  [builder 8/9] COPY . .
+2026-05-24T04:46:31.012439584Z [inf]  [builder 8/9] COPY . .
+2026-05-24T04:46:31.018433872Z [inf]  [builder 9/9] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:46:32.166300495Z [inf]  
+> @workspace/api-server@0.0.0 build /app/artifacts/api-server
+> node ./build.mjs
+
+
+2026-05-24T04:46:32.23995557Z [inf]  Building frontend...
+
+2026-05-24T04:46:32.687859196Z [inf]  
+> @workspace/cloud-ide@0.0.0 build /app/artifacts/cloud-ide
+> vite build --config vite.config.ts
+
+
+2026-05-24T04:46:32.693802831Z [inf]  sh: vite: not found
+
+2026-05-24T04:46:32.710904982Z [inf]   ELIFECYCLE  Command failed.
+
+2026-05-24T04:46:32.711324882Z [inf]   WARN   Local package.json exists, but node_modules missing, did you mean to install?
+
+2026-05-24T04:46:32.729888622Z [inf]  Error: Command failed: pnpm run build
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:916:11)
+    at execSync (node:child_process:988:15)
+    at buildAll (file:///app/artifacts/api-server/build.mjs:24:3) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 28,
+  stdout: null,
+  stderr: null
+}
+
+2026-05-24T04:46:32.750564286Z [inf]  /app/artifacts/api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 build: `node ./build.mjs`
+Exit status 1
+
+2026-05-24T04:46:32.786242299Z [err]  [builder 9/9] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:46:32.815318192Z [err]  Build Failed: build daemon returned an error < failed to solve: process "/bin/sh -c pnpm --filter @workspace/api-server run build" did not complete successfully: exit code: 1 >

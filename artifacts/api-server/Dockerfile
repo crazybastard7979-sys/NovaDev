@@ -9,6 +9,7 @@ COPY lib/api-zod/package.json ./lib/api-zod/
 COPY lib/api-spec/package.json ./lib/api-spec/
 COPY lib/api-client-react/package.json ./lib/api-client-react/
 COPY artifacts/api-server/package.json ./artifacts/api-server/
+COPY artifacts/cloud-ide/package.json ./artifacts/cloud-ide/
 RUN pnpm install --no-frozen-lockfile
 
 FROM base AS builder
@@ -19,6 +20,7 @@ COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
 COPY --from=deps /app/lib/api-spec/node_modules ./lib/api-spec/node_modules
 COPY --from=deps /app/lib/api-client-react/node_modules ./lib/api-client-react/node_modules
 COPY --from=deps /app/artifacts/api-server/node_modules ./artifacts/api-server/node_modules
+COPY --from=deps /app/artifacts/cloud-ide/node_modules ./artifacts/cloud-ide/node_modules
 COPY . .
 RUN pnpm --filter @workspace/api-server run build
 
