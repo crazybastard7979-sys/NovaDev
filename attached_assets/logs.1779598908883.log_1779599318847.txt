@@ -1,0 +1,138 @@
+2026-05-24T04:54:28.064379426Z [inf]  uploading snapshot
+2026-05-24T04:54:29.271992085Z [inf]  fetched snapshot sha256:1732e39048370dd878743dccf4256f6b1ecb3649c89c538d57957648f67dd65d (1.2 MB bytes)
+2026-05-24T04:54:29.272047340Z [inf]  fetching snapshot
+2026-05-24T04:54:29.695655033Z [inf]  [internal] load .dockerignore
+2026-05-24T04:54:29.695655727Z [inf]  [internal] load .dockerignore
+2026-05-24T04:54:29.695660457Z [inf]  [internal] load .dockerignore
+2026-05-24T04:54:29.727922647Z [inf]  [runner 2/5] WORKDIR /app
+2026-05-24T04:54:29.728066889Z [inf]  [builder  2/10] COPY --from=deps /app/node_modules ./node_modules
+2026-05-24T04:54:29.728068545Z [inf]  [builder  8/10] COPY --from=deps /app/artifacts/cloud-ide/node_modules ./artifacts/cloud-ide/node_modules
+2026-05-24T04:54:29.728069243Z [inf]  [deps 5/9] COPY lib/api-spec/package.json ./lib/api-spec/
+2026-05-24T04:54:29.728070387Z [inf]  [builder  4/10] COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
+2026-05-24T04:54:29.728070921Z [inf]  [builder  6/10] COPY --from=deps /app/lib/api-client-react/node_modules ./lib/api-client-react/node_modules
+2026-05-24T04:54:29.728071564Z [inf]  [deps 3/9] COPY lib/db/package.json ./lib/db/
+2026-05-24T04:54:29.728072800Z [inf]  [internal] load build context
+2026-05-24T04:54:29.728073343Z [inf]  [deps 1/9] WORKDIR /app
+2026-05-24T04:54:29.728073835Z [inf]  [builder  3/10] COPY --from=deps /app/lib/db/node_modules ./lib/db/node_modules
+2026-05-24T04:54:29.728074234Z [inf]  [builder  5/10] COPY --from=deps /app/lib/api-spec/node_modules ./lib/api-spec/node_modules
+2026-05-24T04:54:29.728074949Z [inf]  [deps 4/9] COPY lib/api-zod/package.json ./lib/api-zod/
+2026-05-24T04:54:29.728075340Z [inf]  [base 2/2] RUN npm install -g pnpm@10
+2026-05-24T04:54:29.728075713Z [inf]  [deps 6/9] COPY lib/api-client-react/package.json ./lib/api-client-react/
+2026-05-24T04:54:29.728083452Z [inf]  [runner 4/5] COPY --from=builder --chown=novadev:novadev /app/artifacts/api-server/dist ./dist
+2026-05-24T04:54:29.728084396Z [inf]  [builder 10/10] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:54:29.728085464Z [inf]  [builder  9/10] COPY . .
+2026-05-24T04:54:29.728362593Z [inf]  [internal] load build context
+2026-05-24T04:54:29.746285916Z [inf]  [runner 2/5] WORKDIR /app
+2026-05-24T04:54:29.746289500Z [inf]  [base 1/2] FROM docker.io/library/node:22-slim@sha256:7af03b14a13c8cdd38e45058fd957bf00a72bbe17feac43b1c15a689c029c732
+2026-05-24T04:54:29.746477055Z [inf]  [internal] load build context
+2026-05-24T04:54:29.99184217Z [inf]  Adding group `novadev' (GID 1001) ...
+
+2026-05-24T04:54:30.081914824Z [inf]  useradd warning: novadev's uid 1001 is greater than SYS_UID_MAX 999
+
+2026-05-24T04:54:30.196223227Z [inf]  [runner 3/5] RUN addgroup --system --gid 1001 novadev &&     adduser --system --uid 1001 --ingroup novadev novadev
+2026-05-24T04:54:32.209733576Z [inf]  
+added 1 package in 2s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+2026-05-24T04:54:32.383714744Z [inf]  [deps 1/9] WORKDIR /app
+2026-05-24T04:54:32.446482860Z [inf]  [deps 2/9] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+2026-05-24T04:54:32.501810215Z [inf]  [deps 3/9] COPY lib/db/package.json ./lib/db/
+2026-05-24T04:54:32.555114940Z [inf]  [deps 4/9] COPY lib/api-zod/package.json ./lib/api-zod/
+2026-05-24T04:54:32.560759733Z [inf]  [deps 5/9] COPY lib/api-spec/package.json ./lib/api-spec/
+2026-05-24T04:54:32.607260036Z [inf]  [deps 5/9] COPY lib/api-spec/package.json ./lib/api-spec/
+2026-05-24T04:54:32.612867496Z [inf]  [deps 6/9] COPY lib/api-client-react/package.json ./lib/api-client-react/
+2026-05-24T04:54:32.660763896Z [inf]  [deps 6/9] COPY lib/api-client-react/package.json ./lib/api-client-react/
+2026-05-24T04:54:32.667288914Z [inf]  [deps 7/9] COPY artifacts/api-server/package.json ./artifacts/api-server/
+2026-05-24T04:54:32.782386740Z [inf]  [deps 9/9] RUN pnpm install --no-frozen-lockfile
+2026-05-24T04:54:33.687252982Z [inf]  Progress: resolved 0, reused 0, downloaded 1, added 0
+
+2026-05-24T04:54:33.89852763Z [inf]  
+   ╭─────────────────────────────────────────╮
+   │                                         │
+   │   Update available! 10.33.4 → 11.2.2.   │
+   │   Changelog: https://pnpm.io/v/11.2.2   │
+   │    To update, run: pnpm add -g pnpm     │
+   │                                         │
+   ╰─────────────────────────────────────────╯
+
+
+2026-05-24T04:54:34.689069849Z [inf]  Progress: resolved 85, reused 0, downloaded 85, added 0
+
+2026-05-24T04:54:35.720856134Z [inf]  Progress: resolved 481, reused 0, downloaded 477, added 0
+
+2026-05-24T04:54:36.729806876Z [inf]  Packages: +502
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2026-05-24T04:54:37.326424637Z [inf]  .../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+
+2026-05-24T04:54:38.364559467Z [inf]  . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+
+2026-05-24T04:54:38.405143705Z [inf]  . preinstall: Done
+
+2026-05-24T04:54:39.191994596Z [inf]  [deps 9/9] RUN pnpm install --no-frozen-lockfile
+2026-05-24T04:54:41.503150789Z [inf]  [builder  2/10] COPY --from=deps /app/node_modules ./node_modules
+2026-05-24T04:54:47.049203878Z [inf]  [builder  4/10] COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
+2026-05-24T04:54:47.102135297Z [inf]  [builder  4/10] COPY --from=deps /app/lib/api-zod/node_modules ./lib/api-zod/node_modules
+2026-05-24T04:54:47.156822647Z [inf]  [builder  5/10] COPY --from=deps /app/lib/api-spec/node_modules ./lib/api-spec/node_modules
+2026-05-24T04:54:47.163064635Z [inf]  [builder  6/10] COPY --from=deps /app/lib/api-client-react/node_modules ./lib/api-client-react/node_modules
+2026-05-24T04:54:47.213618072Z [inf]  [builder  6/10] COPY --from=deps /app/lib/api-client-react/node_modules ./lib/api-client-react/node_modules
+2026-05-24T04:54:47.272952537Z [inf]  [builder  7/10] COPY --from=deps /app/artifacts/api-server/node_modules ./artifacts/api-server/node_modules
+2026-05-24T04:54:47.341232949Z [inf]  [builder  9/10] COPY . .
+2026-05-24T04:54:47.437708317Z [inf]  [builder 10/10] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:54:47.982487157Z [inf]  Building frontend...
+
+2026-05-24T04:54:48.362925218Z [inf]  
+> @workspace/cloud-ide@0.0.0 build /app/artifacts/cloud-ide
+> vite build --config vite.config.ts
+
+
+2026-05-24T04:54:49.821174251Z [inf]  src/components/ui/label.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+2026-05-24T04:54:49.834510775Z [inf]  src/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+2026-05-24T04:54:49.836373452Z [inf]  src/components/ui/dropdown-menu.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+2026-05-24T04:54:53.325739486Z [inf]  computing gzip size...
+
+2026-05-24T04:54:53.372071842Z [inf]  dist/public/index.html                     1.38 kB │ gzip:   0.54 kB
+
+2026-05-24T04:54:53.372082362Z [inf]  dist/public/assets/index-DJYxXnra.css    113.42 kB │ gzip:  18.24 kB
+
+2026-05-24T04:54:53.372129248Z [inf]  dist/public/assets/index-C1tpM18P.js   1,102.78 kB │ gzip: 328.74 kB
+
+2026-05-24T04:54:53.615217801Z [inf]  
+  dist/index.mjs                       2.5mb ⚠️
+  dist/pino-worker.mjs               153.4kb
+  dist/pino-file.mjs                 142.0kb
+  dist/pino-pretty.mjs               114.6kb
+  dist/thread-stream-worker.mjs        7.3kb
+  dist/index.mjs.map                   4.3mb
+  dist/pino-worker.mjs.map           256.9kb
+  dist/pino-file.mjs.map             229.0kb
+  dist/pino-pretty.mjs.map           204.0kb
+  dist/thread-stream-worker.mjs.map   12.0kb
+
+⚡ Done in 158ms
+
+2026-05-24T04:54:53.616333793Z [inf]  Copying frontend build into server dist/public...
+
+2026-05-24T04:54:53.627938312Z [inf]  Frontend copied.
+
+2026-05-24T04:54:53.685437334Z [inf]  [builder 10/10] RUN pnpm --filter @workspace/api-server run build
+2026-05-24T04:54:55.926440035Z [inf]  [runner 4/5] COPY --from=builder --chown=novadev:novadev /app/artifacts/api-server/dist ./dist
+2026-05-24T04:54:55.932716748Z [inf]  [runner 5/5] COPY --from=builder --chown=novadev:novadev /app/node_modules ./node_modules
+2026-05-24T04:54:59.798397531Z [inf]  [runner 5/5] COPY --from=builder --chown=novadev:novadev /app/node_modules ./node_modules
+2026-05-24T04:55:04.088578494Z [inf]  exporting to docker image format
+2026-05-24T04:55:07.343906844Z [inf]  exporting to docker image format
+2026-05-24T04:55:07.422296043Z [inf]  containerimage.descriptor: eyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQub2NpLmltYWdlLm1hbmlmZXN0LnYxK2pzb24iLCJkaWdlc3QiOiJzaGEyNTY6YTI1NTQzYmExZmZhZTIzNWZiYWVkOTgzYTlkNDg2NDQyZTI0ZDhjNWZkMDMyYTk5MWFmNzM1M2U4ZTgwODJmNSIsInNpemUiOjIwMDUsImFubm90YXRpb25zIjp7Im9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5jcmVhdGVkIjoiMjAyNi0wNS0yNFQwNDo1NTowNloifSwicGxhdGZvcm0iOnsiYXJjaGl0ZWN0dXJlIjoiYW1kNjQiLCJvcyI6ImxpbnV4In19
+2026-05-24T04:55:07.422297879Z [inf]  containerimage.config.digest: sha256:d48e94a137f8ab778c607a820baba3913a4e62fba5de5c36ac336a1bdf444eed
+2026-05-24T04:55:07.422299593Z [inf]  containerimage.digest: sha256:a25543ba1ffae235fbaed983a9d486442e24d8c5fd032a991af7353e8e8082f5
+2026-05-24T04:55:15.960546102Z [inf]  image push
+2026-05-24T04:55:24.231761273Z [inf]  
+2026-05-24T04:55:24.231764808Z [inf]  [37mPath: /api/healthz[0m
+2026-05-24T04:55:24.231766136Z [inf]  
+2026-05-24T04:55:34.300180628Z [inf]  [93mAttempt #1 failed with service unavailable. Continuing to retry for 4m49s[0m
+2026-05-24T04:55:45.328636240Z [inf]  [93mAttempt #2 failed with service unavailable. Continuing to retry for 4m38s[0m
+2026-05-24T04:55:57.357726502Z [inf]  [93mAttempt #3 failed with service unavailable. Continuing to retry for 4m26s[0m
