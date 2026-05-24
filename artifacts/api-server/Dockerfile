@@ -32,6 +32,7 @@ RUN addgroup --system --gid 1001 novadev && \
 
 COPY --from=builder --chown=novadev:novadev /app/artifacts/api-server/dist ./dist
 COPY --from=builder --chown=novadev:novadev /app/node_modules ./node_modules
+COPY --from=builder --chown=novadev:novadev /app/lib/db/migrations ./dist/migrations
 
 USER novadev
 EXPOSE 8080

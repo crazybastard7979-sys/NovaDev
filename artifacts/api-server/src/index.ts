@@ -2,6 +2,7 @@ import { createServer } from "http";
 import app from "./app";
 import { logger } from "./lib/logger";
 import { setupWebSocket } from "./lib/websocket.js";
+import { runMigrations } from "./lib/migrate.js";
 
 const rawPort = process.env["PORT"];
 
@@ -17,14 +18,27 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const server = createServer(app);
-setupWebSocket(server);
+async function start() {
+  if (process.env.DATABASE_URL) {
+    await runMigrations();
+  } else {
+    logger.warn("DATABASE_URL not set — skipping migrations");
+  }
 
-server.listen(port, () => {
-  logger.info({ port }, "Server listening");
-});
+  const server = createServer(app);
+  setupWebSocket(server);
 
-server.on("error", (err) => {
-  logger.error({ err }, "Server error");
+  server.listen(port, () => {
+    logger.info({ port }, "Server listening");
+  });
+
+  server.on("error", (err) => {
+    logger.error({ err }, "Server error");
+    process.exit(1);
+  });
+}
+
+start().catch((err) => {
+  logger.error({ err }, "Failed to start server");
   process.exit(1);
 });
